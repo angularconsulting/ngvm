@@ -57,7 +57,6 @@
   },
   "homepage": "https://github.com/angularconsulting/ngvm#readme",
   "dependencies": {
-    "chalk": "4.1.2",
     "commander": "^10.0.0",
     "open": "^8.4.1"
   },

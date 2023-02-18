@@ -9,13 +9,14 @@ import {
 import open from 'open';
 import { run } from './bash';
 import { accessSync, constants } from 'fs';
-import chalk from 'chalk';
 import { CmdBuilder } from './cmd-builder';
 import {
   BLANK_SPACE,
   EMPTY_STRING,
   NGVM_ASCII,
   NOT_FOUND,
+  TERMINAL_COLOR_RED,
+  TERMINAL_COLOR_RESET,
   ZERO_VERSION
 } from './constants';
 import { Command } from 'commander';
@@ -25,7 +26,11 @@ export function stdout(input: string): void {
 }
 
 export function getNgvmText(): string {
-  return `${chalk.red(NGVM_ASCII)}`;
+  return colorText(NGVM_ASCII);
+}
+
+export function colorText(text: string): string {
+  return `${TERMINAL_COLOR_RED}${text}${TERMINAL_COLOR_RESET}`;
 }
 
 export function cmdVersionOutput(command: BashCommand): string {
