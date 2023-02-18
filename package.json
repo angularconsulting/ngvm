@@ -20,8 +20,9 @@
     }
   },
   "scripts": {
-    "build": "tsc && ts-node src/_post_build.ts",
-    "release": "rm -rf ./dist && npm run build && ts-node src/_post_build.ts",
+    "build": "tsc",
+    "build:clean": "ts-node _post_build.ts",
+    "release": "rm -rf ./dist && npm run build && npm run build:clean",
     "commit": "git-cz",
     "start": "NODE_ENV=dev node -r ts-node/register ./src/bin/ngvm.ts",
     "test": "jest",
