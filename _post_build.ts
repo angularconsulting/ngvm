@@ -1,4 +1,4 @@
-import { isPackageExists } from './util';
+import { isPackageExists } from './src/util';
 import * as fs from 'fs';
 import path from 'path';
 
@@ -15,7 +15,7 @@ const propertiesToDelete: string[] = [
 ];
 
 if (isPackageExists('dist')) {
-  const packageJson = require('../dist/package.json');
+  const packageJson = require('./dist/package.json');
 
   propertiesToDelete.forEach(property => {
     delete packageJson[property];
@@ -29,7 +29,7 @@ if (isPackageExists('dist')) {
 }
 
 // cleanup dist folder content
-const paths = ['dist/src', 'dist/src/bin'];
+const paths = ['dist', 'dist/src', 'dist/src/bin'];
 const filesToDelete = paths.reduce((acc, dir) => {
   try {
     const dirContent = fs.readdirSync(dir);
@@ -44,7 +44,7 @@ const filesToDelete = paths.reduce((acc, dir) => {
   return acc;
 }, [] as string[]);
 
-filesToDelete.push('dist/src/_post_build.js');
+filesToDelete.push('dist/_post_build.js');
 filesToDelete.push('dist/src/bin/ngvm.test.js');
 
 filesToDelete.forEach(file => {

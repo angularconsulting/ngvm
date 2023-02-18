@@ -11,7 +11,7 @@
     "experimentalDecorators": true,
     "strict": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "_post_build.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"],
   "lib": [
     "es2015"
