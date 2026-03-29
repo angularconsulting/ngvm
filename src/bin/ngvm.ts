@@ -47,9 +47,10 @@ export function makeProgram(
   program
     .command('new')
     .alias('n')
-    .option('-ng [version]', 'Use global Angular CLI')
-    .option('-npx [version]', 'Use NPX')
+    .option('--ng [version]', 'Use global Angular CLI')
+    .option('--npx [version]', 'Use NPX')
     .allowUnknownOption(true)
+    .allowExcessArguments(true)
     .description(
       'Create a new Angular application. You can use the global Angular CLI or NPX. You can specify any existing Angular CLI version'
     )
@@ -170,10 +171,7 @@ export function makeProgram(
       }
     });
 
-  // ref: https://github.com/tj/commander.js/issues/1559
-  program
-    .version(version, '-v, --version')
-    .addOption(new Option('-v').hideHelp());
+  program.version(version, '-v, --version');
   program.on('option:v', () => {
     stdout(version);
     process.exit();
@@ -183,8 +181,8 @@ export function makeProgram(
     'after',
     `
   Examples:
-    $ ngvm new my-app --routing --style=scss -npx  
-    $ ngvm new my-app --routing --style=scss -ng 15.0.0  
+    $ ngvm new my-app --routing --style=scss --npx
+    $ ngvm new my-app --routing --style=scss --ng 15.0.0
     $ ngvm show 15.0.0    
     $ ngvm pm yarn  
     $ ngvm diff 14.0.0 15.0.0    

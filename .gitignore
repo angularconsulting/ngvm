@@ -53,7 +53,8 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
-.yarn/install-state.gz
+.yarn/*
+
 
 # dotenv environment variables file
 .env
@@ -66,3 +67,6 @@ typings/
 .vscode
 
 dist/**
+.pnp.cjs
+.pnp.loader.mjs
+.yarnrc.yml
