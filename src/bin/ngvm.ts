@@ -182,10 +182,10 @@ export function makeProgram(
     `
   Examples:
     $ ngvm new my-app --routing --style=scss --npx
-    $ ngvm new my-app --routing --style=scss --ng 15.0.0
-    $ ngvm show 15.0.0    
+    $ ngvm new my-app --routing --style=scss --ng 21.0.0
+    $ ngvm show 21.0.0
     $ ngvm pm yarn  
-    $ ngvm diff 14.0.0 15.0.0    
+    $ ngvm diff 20.0.0 21.0.0
     $ ngvm install -g  `
   );
 
