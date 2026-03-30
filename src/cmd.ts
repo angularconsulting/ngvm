@@ -131,21 +131,17 @@ RxJS: ${getPackageInfo('/RxJS', 'version')}`
   }
 
   public static createApp(options: OptionValues, args: string[]): void {
-    let ngOrNpx = EMPTY_STRING;
-    let version = 'latest';
-    const arr = Object.entries(options);
-    if (arr.length > 0) {
-      // get first arg name: ng|npx
-      ngOrNpx = arr[0][0].toLowerCase();
-      // get first arg value
-      version = typeof arr[0][1] === 'string' ? arr[0][1] : version;
+    const appArgs = args.join(BLANK_SPACE);
+    if (options['ng'] !== undefined) {
+      const version =
+        typeof options['ng'] === 'string' ? options['ng'] : 'latest';
+      this.createUsingGlobalNg(version, appArgs);
+    } else if (options['npx'] !== undefined) {
+      const version =
+        typeof options['npx'] === 'string' ? options['npx'] : 'latest';
+      this.createUsingNpx(version, appArgs);
     } else {
       stdout(`Provide 'ng' or 'npx' option`);
-    }
-    if (ngOrNpx == 'ng') {
-      this.createUsingGlobalNg(version, args.join(BLANK_SPACE));
-    } else if (ngOrNpx == 'npx') {
-      this.createUsingNpx(version, args.join(BLANK_SPACE));
     }
   }
 
