@@ -8,7 +8,7 @@ describe('testing cli', () => {
       .spyOn(Cmd, 'printNgGlobalVersion')
       .mockImplementation(undefined);
     command.execute(new commander.Command(), ['global']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should call local', () => {
@@ -16,7 +16,7 @@ describe('testing cli', () => {
       .spyOn(Cmd, 'printNgLocalVersion')
       .mockImplementation(undefined);
     command.execute(new commander.Command(), ['local']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should call latest', () => {
@@ -24,7 +24,7 @@ describe('testing cli', () => {
       .spyOn(Cmd, 'printNgRemoteVersion')
       .mockImplementation(undefined);
     command.execute(new commander.Command(), ['latest']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should call all versions', () => {
@@ -32,43 +32,43 @@ describe('testing cli', () => {
       .spyOn(Cmd, 'printAllVersions')
       .mockImplementation(undefined);
     command.execute(new commander.Command(), ['versions']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should call inspect', () => {
     const spy = jest.spyOn(Cmd, 'printInfo').mockImplementation(undefined);
     command.execute(new commander.Command(), ['inspect']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should call release', () => {
     const spy = jest.spyOn(Cmd, 'remoteDetails').mockImplementation(undefined);
     command.execute(new commander.Command(), ['show']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should call list', () => {
     const spy = jest.spyOn(Cmd, 'list').mockImplementation(undefined);
     command.execute(new commander.Command(), ['list']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should call install', () => {
     const spy = jest.spyOn(Cmd, 'install').mockImplementation(undefined);
     command.execute(new commander.Command(), ['install']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should call uninstall', () => {
     const spy = jest.spyOn(Cmd, 'uninstall').mockImplementation(undefined);
     command.execute(new commander.Command(), ['uninstall']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should call new', () => {
     const spy = jest.spyOn(Cmd, 'createApp').mockImplementation(undefined);
     command.execute(new commander.Command(), ['new']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should call pkgmanager', () => {
@@ -76,7 +76,7 @@ describe('testing cli', () => {
       .spyOn(Cmd, 'printOrSetPkgManager')
       .mockImplementation(undefined);
     command.execute(new commander.Command(), ['pm']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should call podcast', () => {
@@ -84,7 +84,7 @@ describe('testing cli', () => {
       .spyOn(Cmd, 'navigateToConsulting')
       .mockImplementation(undefined);
     command.execute(new commander.Command(), ['consulting']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should call compat', () => {
@@ -92,12 +92,12 @@ describe('testing cli', () => {
       .spyOn(Cmd, 'navigateToCompat')
       .mockImplementation(undefined);
     command.execute(new commander.Command(), ['compat']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should call diff', () => {
     const spy = jest.spyOn(Cmd, 'navigateToDiff').mockImplementation(undefined);
     command.execute(new commander.Command(), ['diff']);
-    expect(spy).toBeCalled();
+    expect(spy).toHaveBeenCalled();
   });
 });
