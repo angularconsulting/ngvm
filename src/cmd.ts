@@ -111,15 +111,20 @@ RxJS: ${getPackageInfo('/RxJS', 'version')}`
 
   public static createUsingGlobalNg(version: string, args: string): any {
     Context.setGlobalOptionValue(true);
-    Context.setPkgManagerName('npm'); // always use global npm to install a new version
-    this.install(version);
-
+    Context.setPkgManagerName('npm');
+    const pkgManager = PkgManagerCmd.npm;
+    const command = CmdBuilder.prepareCommand('install', [
+      { $pkgManager: pkgManager.name },
+      { $install: `${pkgManager.install} ${pkgManager.global}` },
+      { $version: version }
+    ]);
+    runInteractive(command, false);
     Context.setGlobalOptionValue(false);
-    const command = CmdBuilder.prepareCommand('createWithNg', [
+
+    const createCmd = CmdBuilder.prepareCommand('createWithNg', [
       { $args: args }
     ]);
-
-    return runInteractive(command, true);
+    return runInteractive(createCmd, true);
   }
 
   public static createUsingNpx(version: string, args: string): any {
@@ -131,21 +136,17 @@ RxJS: ${getPackageInfo('/RxJS', 'version')}`
   }
 
   public static createApp(options: OptionValues, args: string[]): void {
-    let ngOrNpx = EMPTY_STRING;
-    let version = 'latest';
-    const arr = Object.entries(options);
-    if (arr.length > 0) {
-      // get first arg name: ng|npx
-      ngOrNpx = arr[0][0].toLowerCase();
-      // get first arg value
-      version = typeof arr[0][1] === 'string' ? arr[0][1] : version;
+    const appArgs = args.join(BLANK_SPACE);
+    if (options['ng'] !== undefined) {
+      const version =
+        typeof options['ng'] === 'string' ? options['ng'] : 'latest';
+      this.createUsingGlobalNg(version, appArgs);
+    } else if (options['npx'] !== undefined) {
+      const version =
+        typeof options['npx'] === 'string' ? options['npx'] : 'latest';
+      this.createUsingNpx(version, appArgs);
     } else {
       stdout(`Provide 'ng' or 'npx' option`);
-    }
-    if (ngOrNpx == 'ng') {
-      this.createUsingGlobalNg(version, args.join(BLANK_SPACE));
-    } else if (ngOrNpx == 'npx') {
-      this.createUsingNpx(version, args.join(BLANK_SPACE));
     }
   }
 
